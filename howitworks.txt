@@ -1,0 +1,5 @@
+1.suppose to use perl script to parse the java source file, for instance, get the function signature, then replace the function body by empty function body.
+Finally, we get the stub functions.
+2. abandon the perl script, because need too much work to get the function signature precisely, if too much keywords ahead, or function signature in multiple lines, several arguments. We need to take all the cases into accounts, but it may still not cover all the cases.
+That's why I think javaParser is a better idea.
+Of course, there'a another java code parse named QDox is a great toole to handlethis. But it's more simple that what I need. So back to javaparse.
