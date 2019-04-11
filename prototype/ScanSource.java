@@ -56,6 +56,8 @@ public class ScanSource {
         File file = new File(destipath.toString()+File.separator+ "Modified.java");
         fr = new FileWriter(file);
         
+        getTypeSolver();
+
     	for(SourceRoot sr: getAllSourceRoots()) {
     		testonesourceroot(sr.getRoot());
     	}
@@ -109,7 +111,6 @@ public class ScanSource {
     
     public static void testonesourceroot(Path path) throws Exception{    	   	
 		SourceRoot sourceRoot = null; 
-		getTypeSolver();
         List<ParseResult<CompilationUnit>> culist = null;
         try {
     		sourceRoot = new SourceRoot(path);
