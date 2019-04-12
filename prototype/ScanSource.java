@@ -83,10 +83,10 @@ public class ScanSource {
     };
 
     public static List<SourceRoot> getAllSourceRoots() throws Exception{
-        // the source root must input the java dir, it mays the dir attribute should be start with {javaidentifier}
-        // that's why here ProjectRoot developed for reventing the wheel each time.
+        // the source root must input the java dir, it reqquires the dir attribute starts with {javaidentifier}
+        // that's why here ProjectRoot is developed to avoid reventing the wheel each time.
         // and attention that: if setup the path into the SourceRoot, and also want to resolve the symbols, at least you should
-        // deeper or equal to the level of the path of SourceRoot, otherwise the local symbols can't be resolved normally.
+        // get deeper or equal to the level of the path of SourceRoot, otherwise the local symbols can't be resolved normally.
     	if(srcrootlist == null) {
 		ProjectRoot projectRoot = new SymbolSolverCollectionStrategy().collect(Paths.get("E:\\my_git_repo\\java_parser\\jdeps_method\\prototype"));
 		srcrootlist = projectRoot.getSourceRoots();
@@ -121,6 +121,53 @@ public class ScanSource {
 
         for(ParseResult<CompilationUnit> item: culist) {
         	item.getResult().get().accept(new ModifierVisitor<Void>() {
+
+                @Override
+                public Visitable visit(FieldAccessExpr n, Void arg) {
+                	try {
+                	SymbolReference<ResolvedValueDeclaration> resValueDecl = JavaParserFacade.get(comdepTypeSolver)
+                            .solve(n);
+//                	System.out.print("METHOD_raw DECLARATIONs:"+resMethodDecl.toString()+"\n");
+                	if(resValueDecl.isSolved()) { 	           	
+//                		System.out.print("METHOD_DECLARATIONs:"+resMethodDecl.getCorrespondingDeclaration().toString()+"\n");
+                		ResolvedValueDeclaration resolvedvadec = resValueDecl.getCorrespondingDeclaration();
+                		if(resolvedvadec instanceof JavassistFieldDeclaration) {//means come from jar file
+                			//add a filter, fileter out class name includes "com.hie"
+                			
+                			JavassistFieldDeclaration jmd = (JavassistFieldDeclaration) resolvedvadec;
+                			String classSymbol= jmd.declaringType().getQualifiedName();
+                			if(classSymbol.matches(".*com\\.hie.*")) {
+                				String valueSymbol ="variable:" + jmd.getName() ;
+                				if(depsymbols.containsKey(classSymbol)) {
+    	            				if(!depsymbols.get(classSymbol).contains(valueSymbol)) {
+    	            					depsymbols.get(classSymbol).add(valueSymbol);
+    	            				}
+                				}else {
+                					depsymbols.put(classSymbol, new ArrayList<String>());
+                					depsymbols.get(classSymbol).add(valueSymbol);
+                				}
+                			}
+//                			System.out.print("FIELD_DECLARATIONs:from jar:"+((JavassistFieldDeclaration) resValueDecl.getCorrespondingDeclaration()).toString()+"\n");
+                		}else if(resolvedvadec instanceof JavaParserFieldDeclaration)  {//means come from java code
+                			FieldDeclaration fielddecl = ((JavaParserFieldDeclaration) resolvedvadec).getWrappedNode() ;
+//                			System.out.print("FIELD_DECLARATIONs:from:"+resValueDecl.getDeclarationAsString()+"\n");
+//                			System.out.print("FIELD_DECLARATIONs:from:"+resValueDecl.toString()+"\n");
+                		}else if(resolvedvadec instanceof ReflectionFieldDeclaration) { //means come from classloader
+//                			System.out.print("FIELD_DECLARATIONs:from classloader:"+resolvedmthddec.toString()+"\n");
+                		}
+                	}
+                	else
+                		System.out.print("FIELD_DECLARATIONs: unsupport corresponding:"+resValueDecl.toString()+"\n");
+                	}
+                	catch(UnsolvedSymbolException e) {
+//                    	System.out.print("warnning: got unsolved valuecls:"+ e.getMessage() +"\n");
+                	}
+
+//                	System.out.print("what we got valuecls:"+n.toString()+"\n");
+                	return super.visit(n, arg);
+                }
+			
+				
                
                 @Override
                 public Visitable visit(MethodCallExpr n, Void arg) {
