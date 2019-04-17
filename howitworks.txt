@@ -3,3 +3,50 @@ Finally, we get the stub functions.
 2. abandon the perl script, because need too much work to get the function signature precisely, if too much keywords ahead, or function signature in multiple lines, several arguments. We need to take all the cases into accounts, but it may still not cover all the cases.
 That's why I think javaParser is a better idea.
 Of course, there'a another java code parse named QDox is a great toole to handlethis. But it's more simple that what I need. So back to javaparse.
+
+3.
+Design the level which you want, 
+
+ we want client code can work with the logger and our API provided.
+Shield the details about the implementation underneath.(I mean, what it depends on, so the declarations and package names of the classes what we really applied should not exist in customer's code. That's at least the minimum requirement we must meet.)
+
+==> client code
+       ---> our APIs
+              --->  third party libs we depend on
+
+
+
+Define the interface to customer, remember to shield the class we really used in the interface.
+
+Class JavaParser{
+//attributes, set/get
+ boolean        addSymbolsSource(SymbolsSource ss);   
+
+SymbolsSource getSymbolsSource();
+
+//behaviors
+startParse();
+
+PauseParse();//? can we do that?
+
+//get all the symbols
+logger setlogger();
+
+//better to support the customization of the prints format, db is optional
+boolean configuresavepath(String path);==>
+
+//
+}
+
+Class SymbolsSource{
+//multiple constructors
+}
+ 
+//specify the package name, class,  method, field, belong to which class.
+Class SymbolFilterRule{
+
+}
+   
+//see the symbol code, which only work when parse successfully, but sometimes we also handle the solved symbol 
+Class SymbolHandler{
+}
