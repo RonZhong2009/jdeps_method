@@ -1,8 +1,8 @@
-package com.ronzhong.imp;
+package com.ronzhong.JSPH.imp;
 
-import com.ronzhong.javaParserHandler.JavaSymbolParserAndHandler;
-import com.ronzhong.javaParserHandler.SymbolFilterRule;
-import com.ronzhong.javaParserHandler.SymbolStorageStrategy;
+import com.ronzhong.JSPH.SymboInteface.JavaSymbolParserAndHandler;
+import com.ronzhong.JSPH.SymboInteface.SymbolFilterRule;
+import com.ronzhong.JSPH.SymboInteface.SymbolStorageStrategy;
 
 public class JavaSymbolParserAndHandlerImp implements JavaSymbolParserAndHandler{
 
@@ -31,12 +31,6 @@ public class JavaSymbolParserAndHandlerImp implements JavaSymbolParserAndHandler
 	}
 
 	@Override
-	public boolean setSymbolHandler() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public boolean setFilterRule(SymbolFilterRule rule) {
 		// TODO Auto-generated method stub
 		return false;
@@ -56,6 +50,12 @@ public class JavaSymbolParserAndHandlerImp implements JavaSymbolParserAndHandler
 
 	@Override
 	public boolean setSymbolSymbolResourceJarFiles(String jarfilepath) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean setSymbolHandler(int handlercode) {
 		// TODO Auto-generated method stub
 		return false;
 	}

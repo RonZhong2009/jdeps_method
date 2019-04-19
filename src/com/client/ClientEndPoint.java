@@ -1,10 +1,10 @@
 package com.client;
 
 
-import com.ronzhong.javaParserHandler.JavaSymbolParserAndHandler;
-import com.ronzhong.javaParserHandler.JavaSymbolParserAndHandlerFactory;
-import com.ronzhong.javaParserHandler.SymbolStorage;
-import com.ronzhong.javaParserHandler.SymbolStorageStrategy;
+import com.ronzhong.JSPH.SymboInteface.JavaSymbolParserAndHandler;
+import com.ronzhong.JSPH.SymboInteface.JavaSymbolParserAndHandlerFactory;
+import com.ronzhong.JSPH.SymboInteface.SymbolStorage;
+import com.ronzhong.JSPH.SymboInteface.SymbolStorageStrategy;
 
 public class ClientEndPoint {
 

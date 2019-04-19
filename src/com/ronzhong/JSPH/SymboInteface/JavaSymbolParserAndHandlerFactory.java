@@ -1,6 +1,6 @@
-package com.ronzhong.javaParserHandler;
+package com.ronzhong.JSPH.SymboInteface;
 
-import com.ronzhong.imp.JavaSymbolParserAndHandlerImp;
+import com.ronzhong.JSPH.imp.JavaSymbolParserAndHandlerImp;
 
 public class JavaSymbolParserAndHandlerFactory {
 	 public JavaSymbolParserAndHandler getInstance() {

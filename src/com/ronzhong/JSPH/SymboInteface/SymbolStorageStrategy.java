@@ -1,4 +1,4 @@
-package com.ronzhong.javaParserHandler;
+package com.ronzhong.JSPH.SymboInteface;
 
 public interface SymbolStorageStrategy {
 

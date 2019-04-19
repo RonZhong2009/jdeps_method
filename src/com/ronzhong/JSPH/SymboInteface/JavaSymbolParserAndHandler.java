@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ronzhong.javaParserHandler;
+package com.ronzhong.JSPH.SymboInteface;
 
 /**
  * @author ronzhong
@@ -19,7 +19,8 @@ public interface JavaSymbolParserAndHandler {
 	public boolean setStorageStrategy(String solvedType, SymbolStorageStrategy strategy);
 	
 	//handle the symbol after solving it, only for solved symbol
-	public boolean setSymbolHandler();
+	//only allow client to choose which handling they want for the symbol
+	public boolean setSymbolHandler(int handlercode);
 	
 	//set the rule to get the target symbol
 	public boolean setFilterRule(SymbolFilterRule rule);
