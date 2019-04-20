@@ -1,4 +1,8 @@
 package com.client;
+import java.time.Instant;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import com.ronzhong.JSPH.SymboInteface.JavaSymbolParserAndHandler;
@@ -10,9 +14,13 @@ public class ClientEndPoint {
 
 	 public static void main(String[] args) {
 
+		    Logger logger = LoggerFactory.getLogger(ClientEndPoint.class);
+		    logger.info("ClientEndPoint:");
+		        
+		    logger.debug("start time: {}.",  Instant.now().toString());
+
 		/*what customer should know:
 		Symbol, MethodSymbol, FieldSymbol.
-		
 		*/
 		JavaSymbolParserAndHandler jts = new JavaSymbolParserAndHandlerFactory().getInstance();
 //		jts.setTargetFile(filepath);
