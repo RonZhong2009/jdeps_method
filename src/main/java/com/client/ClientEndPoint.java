@@ -8,7 +8,7 @@ import com.ronzhong.JSPH.SymboInteface.SymbolStorageStrategy;
 
 public class ClientEndPoint {
 
-	static public void main() {
+	 public static void main(String[] args) {
 
 		/*what customer should know:
 		Symbol, MethodSymbol, FieldSymbol.
