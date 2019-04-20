@@ -6,10 +6,17 @@ import com.ronzhong.JSPH.SymboInteface.SymbolStorageStrategy;
 
 public class JavaSymbolParserAndHandlerImp implements JavaSymbolParserAndHandler{
 
+	private String targetFile;
+	
 	@Override
 	public boolean setTargetFile(String filePath) {
 		// TODO Auto-generated method stub
+		targetFile = filePath;
 		return false;
+	}
+
+	public String getTargetFile() {
+		return targetFile;
 	}
 
 	@Override
