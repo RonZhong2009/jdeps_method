@@ -19,7 +19,7 @@ public class JavaSymbolParserAndHandlerImpTest {
 
     @Test
     public void testTarget() {
-    	symbolparseAndHandler.setTargetFile("testpath");
+//    	symbolparseAndHandler.setTargetFile("testpath");
     	 assertEquals("testpath", symbolparseAndHandler.getTargetFile());
     }
 
