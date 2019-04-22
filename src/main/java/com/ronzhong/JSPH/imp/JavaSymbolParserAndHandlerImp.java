@@ -15,7 +15,7 @@ public class JavaSymbolParserAndHandlerImp implements JavaSymbolParserAndHandler
 	}
 
 	@Override
-	public boolean setStorageStrategy(String solvedType, SymbolStorageStrategy strategy) {
+	public boolean setStorageStrategy(int solvedType, SymbolStorageStrategy strategy) {
 		// TODO Auto-generated method stub
 		return false;
 	}

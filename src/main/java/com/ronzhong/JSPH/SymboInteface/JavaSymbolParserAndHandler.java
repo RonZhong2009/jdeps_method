@@ -30,7 +30,7 @@ public interface JavaSymbolParserAndHandler {
 	public boolean addSymbolSolver(JavaSymboSolver symSolver);
 
 	//you can set up multiple strategies together
-	public boolean setStorageStrategy(String solvedType, SymbolStorageStrategy strategy);
+	public boolean setStorageStrategy(int solvedType, SymbolStorageStrategy strategy);
 	
 	//handle the symbol after solving it, only for solved symbol
 	//only allow client to choose which handling they want for the symbol
