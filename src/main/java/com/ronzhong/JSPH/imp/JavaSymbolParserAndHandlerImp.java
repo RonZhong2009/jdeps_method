@@ -3,7 +3,7 @@ package com.ronzhong.JSPH.imp;
 import com.ronzhong.JSPH.SymboInteface.JavaSymboSolver;
 import com.ronzhong.JSPH.SymboInteface.JavaSymbolParserAndHandler;
 import com.ronzhong.JSPH.SymboInteface.JavaSymbolRepository;
-import com.ronzhong.JSPH.SymboInteface.SymbolFilterRule;
+import com.ronzhong.JSPH.SymboInteface.SymbolFilter;
 import com.ronzhong.JSPH.SymboInteface.SymbolStorageStrategy;
 
 public class JavaSymbolParserAndHandlerImp implements JavaSymbolParserAndHandler{
@@ -39,7 +39,7 @@ public class JavaSymbolParserAndHandlerImp implements JavaSymbolParserAndHandler
 	}
 
 	@Override
-	public boolean addFilterRule(SymbolFilterRule rule) {
+	public boolean addFilterRule(SymbolFilter rule) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -37,7 +37,7 @@ public interface JavaSymbolParserAndHandler {
 	public boolean setSymbolHandler(int handlercode);
 	
 	//set the rule to get the target symbol
-	public boolean addFilterRule(SymbolFilterRule rule);
+	public boolean addFilterRule(SymbolFilter rule);
 	
 	// move the following methods to class JavaSymboSolver:	
 	//	public boolean setSymbolSymbolResourceCodeFiles(String codefilepath);

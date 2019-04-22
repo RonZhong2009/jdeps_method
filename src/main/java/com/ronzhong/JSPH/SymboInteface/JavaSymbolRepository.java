@@ -9,10 +9,4 @@ public class JavaSymbolRepository {
 	public void JavaSymbolRepository(int repostoryType, String filepath) {
 		
 	};
-	
-//	public boolean setTargetFile(String filePath);
-//	
-//	public boolean setTargetDir(String dirPath);
-//	
-//	public boolean setTargetProject(String projectPath);
 }
