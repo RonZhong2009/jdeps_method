@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 
 
 import com.ronzhong.JSPH.SymboInteface.JavaSymbolParserAndHandler;
-import com.ronzhong.JSPH.SymboInteface.JavaSymbolParserAndHandlerFactory;
 import com.ronzhong.JSPH.SymboInteface.SymbolStorage;
 import com.ronzhong.JSPH.SymboInteface.SymbolStorageStrategy;
 
@@ -22,7 +21,7 @@ public class ClientEndPoint {
 		/*what customer should know:
 		Symbol, MethodSymbol, FieldSymbol.
 		*/
-		JavaSymbolParserAndHandler jts = new JavaSymbolParserAndHandlerFactory().getInstance();
+		JavaSymbolParserAndHandler jts = new JavaSymbolParserAndHandler(null, null, 0);
 //		jts.setTargetFile(filepath);
 //		jts.setRule(RuleFactory.getRule(symbolObjType, attributename, pattern);
 //		//there will be a default strategy for each symbol type.

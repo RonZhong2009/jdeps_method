@@ -17,33 +17,24 @@ package com.ronzhong.JSPH.SymboInteface;
  * compatibility issues. 
  * Means we don't have to provide only one class to meet all the requirement!
  */
-public interface JavaSymbolParserAndHandler {
+public class JavaSymbolParserAndHandler {
 
-// move the following methods to class JavaSymbolRepository:
-	//	public boolean setTargetFile(String filePath);
-	//	
-	//	public boolean setTargetDir(String dirPath);
-	//	
-	//	public boolean setTargetProject(String projectPath);
-	public boolean setSymbolRepository(JavaSymbolRepository symRep);
+	public JavaSymbolParserAndHandler(JavaSymbolRepository symRep, JavaSymboSolver symbolSolver, int handlercode) {
+		
+	}
 	
-	public boolean addSymbolSolver(JavaSymboSolver symSolver);
-
-	//you can set up multiple strategies together
-	public boolean setStorageStrategy(int solvedType, SymbolStorageStrategy strategy);
+	public boolean addSymbolSolver(JavaSymboSolver symSolver) {
+		return false;
+	}
 	
 	//handle the symbol after solving it, only for solved symbol
 	//only allow client to choose which handling they want for the symbol
-	public boolean setSymbolHandler(int handlercode);
+	public boolean getfilterOutSymbols(int SymbolType, int SymbolDecAttribute, String pattern, SymbolStorageStrategy strategy) {
+		return false;
+	}
 	
-	//set the rule to get the target symbol
-	public boolean addFilterRule(SymbolFilter rule);
-	
-	// move the following methods to class JavaSymboSolver:	
-	//	public boolean setSymbolSymbolResourceCodeFiles(String codefilepath);
-	//	
-	//	public boolean setSymbolSymbolResourceClaassLoader(ClassLoader classloder);
-	//
-	//	public boolean setSymbolSymbolResourceJarFiles(String jarfilepath);
-
+	public SymbolStorageStrategy getSymbolStorageStrategy(int storagetype, String storagepath) {
+		return null;
+	}
+    
 }
