@@ -3,6 +3,9 @@
  */
 package com.ronzhong.JSPH.SymboInteface;
 
+
+
+
 /**
  * @author ronzhong
  * Need to think about the interface, design it easy to use and extend.
@@ -19,9 +22,17 @@ package com.ronzhong.JSPH.SymboInteface;
  */
 public class JavaSymbolParserAndHandler {
 
+
+	//save all the symbols into MogoDB
+	//The symbols in the file can be organized to be searched easily. 
+	// and they can be restored into the source file.
 	public JavaSymbolParserAndHandler(JavaSymbolRepository symRep, JavaSymboSolver symbolSolver, int handlercode) {
 		
 	}
+	
+	
+
+	
 	
 	public boolean addSymbolSolver(JavaSymboSolver symSolver) {
 		return false;
