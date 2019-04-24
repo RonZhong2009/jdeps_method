@@ -27,13 +27,9 @@ public class JavaSymbolParserAndHandler {
 	//The symbols in the file can be organized to be searched easily. 
 	// and they can be restored into the source file.
 	public JavaSymbolParserAndHandler(JavaSymbolRepository symRep, JavaSymboSolver symbolSolver, int handlercode) {
-		
+//		
 	}
-	
-	
 
-	
-	
 	public boolean addSymbolSolver(JavaSymboSolver symSolver) {
 		return false;
 	}
@@ -45,6 +41,7 @@ public class JavaSymbolParserAndHandler {
 	}
 	
 	public SymbolStorageStrategy getSymbolStorageStrategy(int storagetype, String storagepath) {
+		
 		return null;
 	}
     

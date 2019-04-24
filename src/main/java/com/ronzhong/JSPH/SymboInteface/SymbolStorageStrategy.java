@@ -1,5 +1,12 @@
 package com.ronzhong.JSPH.SymboInteface;
 
-public interface SymbolStorageStrategy {
+public abstract class SymbolStorageStrategy {
 	
+	static public int SYM_STORAGET_TYPE_FILE;
+	static public int SYM_STORAGET_TYPE_DB;
+	static public int SYM_STORAGET_TYPE_MOGODB;
+	
+	protected SymbolStorageStrategy(int storagetype, String storagepath) {
+		
+	};
 }
