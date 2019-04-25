@@ -41,5 +41,11 @@ public class JavaSymboSolver {
 			logger.error("with wrong type to create JavaSymbolSlover");
 		}
 	};
+	
+	public boolean addSymbolSolver(JavaSymboSolver symSolver) {
+		//TODO: merge the SymbolSolver into the current instance
+		return false;
+	}
+	
 
 }
