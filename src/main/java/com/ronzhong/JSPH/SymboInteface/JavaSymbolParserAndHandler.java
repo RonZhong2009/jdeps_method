@@ -3,8 +3,8 @@
  */
 package com.ronzhong.JSPH.SymboInteface;
 
-
-
+import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver;
+import com.github.javaparser.utils.SourceRoot;
 
 /**
  * @author ronzhong
@@ -21,21 +21,19 @@ package com.ronzhong.JSPH.SymboInteface;
  * Means we don't have to provide only one class to meet all the requirement!
  */
 public class JavaSymbolParserAndHandler {
-
-
+        private  CombinedTypeSolver typeSolver =  null;
+	private  List<SourceRoot> srcrootlist = null;
+	
 	//save all the symbols into MogoDB
 	//The symbols in the file can be organized to be searched easily. 
 	// and they can be restored into the source file.
 	public JavaSymbolParserAndHandler(JavaSymbolRepository symRep, JavaSymboSolver symbolSolver, int handlercode) {
 //		
-		symRep.getSourceRootList();
-		symbolSolver.getJavaParser();
+		srcrootlist = symRep.getSourceRootList();
+		typeSolver = symbolSolver.getJavaParser();
 	}
 
-	public boolean addSymbolSolver(JavaSymboSolver symSolver) {
-		return false;
-	}
-	
+
 	//handle the symbol after solving it, only for solved symbol
 	//only allow client to choose which handling they want for the symbol
 	public boolean getfilterOutSymbols(int SymbolType, int SymbolDecAttribute, String pattern, SymbolStorageStrategy strategy) {
