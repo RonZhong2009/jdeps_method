@@ -28,6 +28,8 @@ public class JavaSymbolParserAndHandler {
 	// and they can be restored into the source file.
 	public JavaSymbolParserAndHandler(JavaSymbolRepository symRep, JavaSymboSolver symbolSolver, int handlercode) {
 //		
+		symRep.getSourceRootList();
+		symbolSolver.getJavaParser();
 	}
 
 	public boolean addSymbolSolver(JavaSymboSolver symSolver) {
