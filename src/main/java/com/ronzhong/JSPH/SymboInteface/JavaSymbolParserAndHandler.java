@@ -3,8 +3,11 @@
  */
 package com.ronzhong.JSPH.SymboInteface;
 
+import java.util.List;
+
 import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver;
 import com.github.javaparser.utils.SourceRoot;
+import com.ronzhong.JSPH.imp.MogoDBSymbolStorageStrategy;
 
 /**
  * @author ronzhong
@@ -21,8 +24,10 @@ import com.github.javaparser.utils.SourceRoot;
  * Means we don't have to provide only one class to meet all the requirement!
  */
 public class JavaSymbolParserAndHandler {
-        private  CombinedTypeSolver typeSolver =  null;
+    private  CombinedTypeSolver typeSolver =  null;
 	private  List<SourceRoot> srcrootlist = null;
+	private  SymbolStorageStrategy outstorage = null;
+	
 	
 	//save all the symbols into MogoDB
 	//The symbols in the file can be organized to be searched easily. 
@@ -31,17 +36,22 @@ public class JavaSymbolParserAndHandler {
 //		
 		srcrootlist = symRep.getSourceRootList();
 		typeSolver = symbolSolver.getJavaParser();
+		
 	}
 
 
 	//handle the symbol after solving it, only for solved symbol
 	//only allow client to choose which handling they want for the symbol
 	public boolean getfilterOutSymbols(int SymbolType, int SymbolDecAttribute, String pattern, SymbolStorageStrategy strategy) {
+		outstorage = strategy;
 		return false;
 	}
 	
 	public SymbolStorageStrategy getSymbolStorageStrategy(int storagetype, String storagepath) {
-		
+		if(storagetype == 0) {
+			MogoDBSymbolStorageStrategy storage  = new MogoDBSymbolStorageStrategy(storagepath);
+			return storage;
+		}
 		return null;
 	}
     

@@ -23,7 +23,6 @@ public class JavaSymboSolver {
 	static public int SYMBOL_SOLVER_RESOURCE_PATH_TO_JAR = 0X0002;
 		
 	public JavaSymboSolver(ClassLoader classloader){
-		
 		this.classloaderdepTypeSolver  = new ClassLoaderTypeSolver(classloader);
 		this.comdepTypeSolver.add(this.classloaderdepTypeSolver);
 		
@@ -44,7 +43,13 @@ public class JavaSymboSolver {
 	
 	public boolean addSymbolSolver(JavaSymboSolver symSolver) {
 		//TODO: merge the SymbolSolver into the current instance
-		return false;
+		this.comdepTypeSolver.add(symSolver.getJavaParser());
+		return true;
+	}
+
+	protected CombinedTypeSolver getJavaParser() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

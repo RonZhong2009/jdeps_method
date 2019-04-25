@@ -13,15 +13,19 @@ import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 
-public class AllSymbolRepoMogodb {
+class SymbolRepoMogodb {
 	private MongoCollection<Document> collection;
 	
-	public void AllSymbolRepoMogodb() {
+	public SymbolRepoMogodb() {
 		collection = connect( "javasymbolrepo", "default", "localhost", 27017);
 	}
 	
+	public SymbolRepoMogodb(String dblocation) {
+		collection = connect(dblocation);
+	}
 	
-	public void AllSymbolRepoMogodb(String databaseName, String collectionName,
+	
+	public SymbolRepoMogodb(String databaseName, String collectionName,
             String hostName, int port) {
 		collection = connect( databaseName, collectionName,hostName, port);
 	}
@@ -34,6 +38,22 @@ public class AllSymbolRepoMogodb {
         tempCollection = db.getCollection(collectionName);
         System.out.println(collection);
         return tempCollection;
+    }
+    
+    private MongoCollection<Document> connect(String dblocation) {
+    	MongoCollection<Document> tempCollection = null;
+    	//TODO: extract the hostName and port number from dblocation string
+    	//        MongoClient client = MongoClients.create("mongodb://"+hostName+":"+ String.valueOf(port));
+
+        //TODO: extract the databaseName and collectionName from dblocation string
+        //        MongoDatabase db = client.getDatabase(databaseName);
+        //        tempCollection = db.getCollection(collectionName);
+        System.out.println(collection);
+        return tempCollection;
+    }
+    
+    public void addSymbolRecord(Document doc) {
+    	collection.insertOne(doc);
     }
 
     //define what attributes will be stored into the mogodb for each symbol

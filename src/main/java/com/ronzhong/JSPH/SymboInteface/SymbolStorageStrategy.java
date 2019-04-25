@@ -6,7 +6,11 @@ public abstract class SymbolStorageStrategy {
 	static public int SYM_STORAGET_TYPE_DB;
 	static public int SYM_STORAGET_TYPE_MOGODB;
 	
-	protected SymbolStorageStrategy(int storagetype, String storagepath) {
+	protected SymbolStorageStrategy(String storagepath) {
 		
 	};
+	
+	protected void Save(Symbol sym) {
+		
+	}
 }
