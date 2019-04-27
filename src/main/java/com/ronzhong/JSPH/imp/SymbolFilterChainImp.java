@@ -14,9 +14,14 @@ public class SymbolFilterChainImp implements SymbolFilterChain {
 	private List<SymbolFilter>  filterlist; // which should has current position attribute.
 
 	public void doFilterOut(Symbol sym) {
-		 SymbolFilter filter = this.filterlist.get(curIndex++);
-		 filter.doFilterOut(sym, this);
-		 filter.afterPropertiesSet();
+	
+		if(curIndex <= (this.filterlist.size() - 1)) {
+			SymbolFilter filter = null;
+			filter = this.filterlist.get(curIndex++);
+			filter.doFilterOut(sym, this);
+			filter.afterPropertiesSet();
+		}
+
 	}
 
 	@Override

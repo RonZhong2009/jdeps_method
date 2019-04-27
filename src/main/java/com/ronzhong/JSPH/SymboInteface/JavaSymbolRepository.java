@@ -29,6 +29,6 @@ public class JavaSymbolRepository {
 
 	protected List<SourceRoot> getSourceRootList() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.srcrootlist;
 	};
 }

@@ -36,7 +36,7 @@ public class OutputSymFilter implements SymbolFilter {
 	public void doFilterOut(Symbol sym, SymbolFilterChain chain) {
 		// since it can run to this step, it means it has passed all the filter,
 		// and now it's time to store it into the storage client specified.
-		storage.Save(sym);
+		storage.save(sym);
 		
 		//TODO: maybe check out whether OutputSymFilter is the last item of chain.
 

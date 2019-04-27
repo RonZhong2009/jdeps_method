@@ -24,12 +24,14 @@ public class JavaSymboSolver {
 		
 	public JavaSymboSolver(ClassLoader classloader){
 		this.classloaderdepTypeSolver  = new ClassLoaderTypeSolver(classloader);
+		comdepTypeSolver = new CombinedTypeSolver();
 		this.comdepTypeSolver.add(this.classloaderdepTypeSolver);
 		
 	};
 	
 	public JavaSymboSolver(int pathType, String filepath) throws IOException{
 	
+		comdepTypeSolver = new CombinedTypeSolver();
 		if( pathType == SYMBOL_SOLVER_RESOURCE_PATH_TO_CODE){
 			this.javaparserdepTypeSolver = new JavaParserTypeSolver(filepath);
 			this.comdepTypeSolver.add(this.javaparserdepTypeSolver);
@@ -42,6 +44,9 @@ public class JavaSymboSolver {
 	};
 	
 	public boolean addSymbolSolver(JavaSymboSolver symSolver) {
+		if(comdepTypeSolver == null)
+			comdepTypeSolver = new CombinedTypeSolver();
+		
 		//TODO: merge the SymbolSolver into the current instance
 		this.comdepTypeSolver.add(symSolver.getJavaParser());
 		return true;
@@ -49,7 +54,7 @@ public class JavaSymboSolver {
 
 	protected CombinedTypeSolver getJavaParser() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.comdepTypeSolver;
 	}
 	
 

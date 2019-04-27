@@ -30,7 +30,6 @@ import com.github.javaparser.symbolsolver.reflectionmodel.ReflectionFieldDeclara
 import com.github.javaparser.symbolsolver.reflectionmodel.ReflectionMethodDeclaration;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver;
 import com.github.javaparser.utils.SourceRoot;
-import com.ronzhong.JSPH.imp.MogoDBSymbolStorageStrategy;
 import com.ronzhong.JSPH.imp.OutputSymFilter;
 import com.ronzhong.JSPH.imp.SymbolFilterChainImp;
 
@@ -67,6 +66,7 @@ public class JavaSymbolParserAndHandler {
 	public JavaSymbolParserAndHandler(JavaSymbolRepository symRep, JavaSymboSolver symbolSolver) {
 		srcrootlist = symRep.getSourceRootList();
 		typeSolver = symbolSolver.getJavaParser();
+		filterchain = new SymbolFilterChainImp();
 	}
 
 
@@ -75,9 +75,14 @@ public class JavaSymbolParserAndHandler {
 	// handlercode works for the target symbol!
 	// filterList: will be created by cusotmer from JavaSymbolFilterFactory
 	// strategy  : will be created by customer from JavaSymbolStorageStrategyFactory
-	public boolean getfilterOutSymbols(List<SymbolFilter> filterList, SymbolStorageStrategy strategy, int handlercode) {
+	public boolean getfilterOutSymbols(List<SymbolFilter> filterList, SymbolStorageStrategy strategy, int handlercode) throws Exception {
 		filterList.add(new OutputSymFilter(strategy));
 		filterchain.add(filterList);
+		
+    	for(SourceRoot sr: this.srcrootlist) {
+    		handleSourceroot(sr);
+    	}
+    	
 //		outstorage = strategy;
 		//TODO: start to get the symbols and store into storage specified.
 		

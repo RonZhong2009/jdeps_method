@@ -35,7 +35,7 @@ public class MethodSymFilter implements SymbolFilter {
 			chain.doFilterOut(sym);
 		}else {
 			//check whether the attraibute matches the pattern
-			if(symDecType ==Symbol.SYM_DECLARATION_METHOD &&sym.getDeclmethod().matches(pattern)){
+			if(symDecType ==Symbol.SYM_DECLARATION_CLASS &&sym.getDeclmethod().matches(pattern)){
 				chain.doFilterOut(sym);
 			}else {
 			    logger.info("MethodSymFilter: symbol dosen't match the pattern string.");

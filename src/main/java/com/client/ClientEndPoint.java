@@ -19,7 +19,7 @@ import com.ronzhong.JSPH.SymboInteface.SymbolStorageStrategy;
 
 public class ClientEndPoint {
 
-	 public static void main(String[] args) throws IOException {
+	 public static void main(String[] args) throws Exception {
 
 		    Logger logger = LoggerFactory.getLogger(ClientEndPoint.class);
 		    logger.info("ClientEndPoint:");
@@ -32,14 +32,16 @@ public class ClientEndPoint {
 		    
 		JavaSymbolParserAndHandler jts = new JavaSymbolParserAndHandler(
 				new JavaSymbolRepository(JavaSymbolRepository.REPOSITORY_TYPE_PROJECT , 
-                                                            "E:\\my_git_repo\\java_parser\\jdeps_method\\prototype"),
+                                                            "E:\\my_git_repo\\java_parser\\prototype\\"),
 				new JavaSymboSolver(JavaSymboSolver.SYMBOL_SOLVER_RESOURCE_PATH_TO_JAR, 
-															"E:\\my_git_repo\\java_parser\\jdeps_method\\prototype\\lib\\dependent.jar"));
+															"E:\\my_git_repo\\java_parser\\jdeps_method\\src\\main\\resources\\JSPHtest.jar"));
 		List<SymbolFilter> filterList =  new ArrayList<SymbolFilter>();
 		SymbolStorageStrategy	strategy = new JavaSymbolStorageStrategyFactory().
-				createStoragy(SymbolStorageStrategy.SYM_STORAGET_TYPE_MOGODB, "mogodb:\\");
+				createStoragy(SymbolStorageStrategy.SYM_STORAGET_TYPE_FILE, "E:\\my_git_repo\\java_parser\\result.txt");
+//		SymbolFilter filter = new JavaSymbolFilterFactory().createFilter
+//				(Symbol.SYM_TYPE_METHOD, Symbol.SYM_DECLARATION_CLASS, ".*com\\.ronzhong.*");
 		SymbolFilter filter = new JavaSymbolFilterFactory().createFilter
-				(Symbol.SYM_TYPE_FIELD, Symbol.SYM_DECLARATION_METHOD, "*");
+				(Symbol.SYM_TYPE_FIELD, Symbol.SYM_DECLARATION_CLASS, ".*");
 		filterList.add(filter);
 
 		int handlercode = 0;//default value
