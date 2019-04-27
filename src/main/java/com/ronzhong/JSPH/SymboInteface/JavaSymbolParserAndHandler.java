@@ -31,6 +31,7 @@ import com.github.javaparser.symbolsolver.reflectionmodel.ReflectionMethodDeclar
 import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver;
 import com.github.javaparser.utils.SourceRoot;
 import com.ronzhong.JSPH.imp.MogoDBSymbolStorageStrategy;
+import com.ronzhong.JSPH.imp.OutputSymFilter;
 import com.ronzhong.JSPH.imp.SymbolFilterChainImp;
 
 
@@ -53,7 +54,7 @@ import com.ronzhong.JSPH.imp.SymbolFilterChainImp;
 public class JavaSymbolParserAndHandler {
     private  CombinedTypeSolver typeSolver =  null;
 	private  List<SourceRoot> srcrootlist = null;
-	private  SymbolStorageStrategy outstorage = null;
+//	private  SymbolStorageStrategy outstorage = null;
 	private  SymbolFilterChainImp filterchain = null;
     private  HashMap<String, ArrayList<String>> depsymbols = new HashMap<String, ArrayList<String>>();  
 
@@ -75,8 +76,9 @@ public class JavaSymbolParserAndHandler {
 	// filterList: will be created by cusotmer from JavaSymbolFilterFactory
 	// strategy  : will be created by customer from JavaSymbolStorageStrategyFactory
 	public boolean getfilterOutSymbols(List<SymbolFilter> filterList, SymbolStorageStrategy strategy, int handlercode) {
+		filterList.add(new OutputSymFilter(strategy));
 		filterchain.add(filterList);
-		outstorage = strategy;
+//		outstorage = strategy;
 		//TODO: start to get the symbols and store into storage specified.
 		
 		return false;
@@ -101,22 +103,15 @@ public class JavaSymbolParserAndHandler {
 //                		System.out.print("METHOD_DECLARATIONs:"+resMethodDecl.getCorrespondingDeclaration().toString()+"\n");
                 		ResolvedValueDeclaration resolvedvadec = resValueDecl.getCorrespondingDeclaration();
                 		if(resolvedvadec instanceof JavassistFieldDeclaration) {//means come from jar file
-                			//add a filter, fileter out class name includes "com.hie"
-                			
+                		                			
                 			JavassistFieldDeclaration jmd = (JavassistFieldDeclaration) resolvedvadec;
                 			String classSymbol= jmd.declaringType().getQualifiedName();
-                			if(classSymbol.matches(".*com\\.ronzhong.*")) {
-                				String valueSymbol ="variable:" + jmd.getName() ;
-                				if(depsymbols.containsKey(classSymbol)) {
-    	            				if(!depsymbols.get(classSymbol).contains(valueSymbol)) {
-    	            					depsymbols.get(classSymbol).add(valueSymbol);
-    	            				}
-                				}else {
-                					depsymbols.put(classSymbol, new ArrayList<String>());
-                					depsymbols.get(classSymbol).add(valueSymbol);
-                				}
-                			}
-//                			System.out.print("FIELD_DECLARATIONs:from jar:"+((JavassistFieldDeclaration) resValueDecl.getCorrespondingDeclaration()).toString()+"\n");
+                			Symbol sym = new Symbol();
+                			sym.setDeclclass(classSymbol);
+                			sym.setType(Symbol.SYM_TYPE_FIELD);
+                			sym.setValue(jmd.getName());
+                			filterchain.doFilterOut(sym);
+                			               			
                 		}else if(resolvedvadec instanceof JavaParserFieldDeclaration)  {//means come from java code
                 			FieldDeclaration fielddecl = ((JavaParserFieldDeclaration) resolvedvadec).getWrappedNode() ;
 //                			System.out.print("FIELD_DECLARATIONs:from:"+resValueDecl.getDeclarationAsString()+"\n");
@@ -148,26 +143,15 @@ public class JavaSymbolParserAndHandler {
 //                		System.out.print("METHOD_DECLARATIONs:"+resMethodDecl.getCorrespondingDeclaration().toString()+"\n");
                 		ResolvedMethodDeclaration resolvedmthddec = resMethodDecl.getCorrespondingDeclaration();
                 		if(resolvedmthddec instanceof JavassistMethodDeclaration) {//means come from jar file
-                			//add a filter, fileter out class name includes "com.ronzhong"
                 			
                 			JavassistMethodDeclaration jmd = (JavassistMethodDeclaration) resMethodDecl.getCorrespondingDeclaration();
                 			String classSymbol= jmd.declaringType().getQualifiedName();
-                			if(classSymbol.matches(".*com\\.ronzhong.*")) {
-//                				System.out.print("METHOD_DECLARATIONs:from jar class:"+jmd.declaringType().getQualifiedName()+"\n");
-//                				System.out.print("METHOD_DECLARATIONs:from getQualifiedName method:"+jmd.getQualifiedName() +"\n");
-//                				System.out.print("METHOD_DECLARATIONs:from getSignature method:"+jmd.getSignature() +"\n");
-                				String methodSymbol = jmd.getQualifiedSignature();
-                				System.out.print("METHOD_DECLARATIONs:from getQualifiedSignature method:"+jmd.getQualifiedSignature() +"\n");
-                				if(depsymbols.containsKey(classSymbol)) {
-    	            				if(!depsymbols.get(classSymbol).contains(methodSymbol)) {
-    	            					depsymbols.get(classSymbol).add(methodSymbol);
-    	            				}
-                				}else {
-                					depsymbols.put(classSymbol, new ArrayList<String>());
-                					depsymbols.get(classSymbol).add(methodSymbol);
-                				}
-                			}
-//                			System.out.print("METHOD_DECLARATIONs:from jar:"+((JavassistMethodDeclaration) resMethodDecl.getCorrespondingDeclaration()).toString()+"\n");
+                			Symbol sym = new Symbol();
+                			sym.setDeclclass(classSymbol);
+                			sym.setType(Symbol.SYM_TYPE_METHOD);
+                			sym.setValue(jmd.getName());
+                			filterchain.doFilterOut(sym);
+                			
                 		}else if(resolvedmthddec instanceof JavaParserMethodDeclaration)  {//means come from java code
                 			MethodDeclaration methoddecl = ((JavaParserMethodDeclaration) resolvedmthddec).getWrappedNode() ;
 //                			System.out.print("METHOD_DECLARATIONs:method:"+methoddecl.getDeclarationAsString()+"\n");

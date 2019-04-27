@@ -22,6 +22,16 @@ public class Symbol {
 	
 	private int type =  0;
 	
+	private String value = null;
+	
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
 	public String getDeclImport() {
 		return declImport;
 	}
@@ -67,10 +77,15 @@ public class Symbol {
 		type = SY_TYPE_UNKNOW;
 	}
 	
-	public int getSymboType() {
+	public int getType() {
 		return type;
 	}
 	
+	
+	public int setType(int type) {
+		this.type = type;
+		return this.type;
+	}
 
 
 }

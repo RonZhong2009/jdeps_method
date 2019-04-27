@@ -39,23 +39,13 @@ public class ClientEndPoint {
 		SymbolStorageStrategy	strategy = new JavaSymbolStorageStrategyFactory().
 				createStoragy(SymbolStorageStrategy.SYM_STORAGET_TYPE_MOGODB, "mogodb:\\");
 		SymbolFilter filter = new JavaSymbolFilterFactory().createFilter
-				(Symbol.SYM_STATE_SOLVED, Symbol.SYM_DECLARATION_METHOD, "*");
+				(Symbol.SYM_TYPE_FIELD, Symbol.SYM_DECLARATION_METHOD, "*");
 		filterList.add(filter);
 
 		int handlercode = 0;//default value
 		
 		jts.getfilterOutSymbols(filterList, strategy, handlercode);
-		
-		//		jts.setTargetFile(filepath);
-//		jts.setRule(RuleFactory.getRule(symbolObjType, attributename, pattern);
-//		//there will be a default strategy for each symbol type.
-//		jts.setStorageStrategy( solvedType, 
-//								new SymbolStorageStrategy(
-//										format, 
-//										new SymbolStorage(storagePath)));
-//		//format can be extended into a strandardized class from symbol to show more.
-//		jts.setSymbolHandler(JavaSymbol, );
-		
+				
 	}
 	
 }

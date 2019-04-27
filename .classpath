@@ -9,7 +9,7 @@
   <classpathentry kind="var" path="M2_REPO/com/github/javaparser/javaparser-symbol-solver-logic/3.13.6/javaparser-symbol-solver-logic-3.13.6.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/javassist/javassist/3.24.0-GA/javassist-3.24.0-GA.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/github/javaparser/javaparser-symbol-solver-model/3.13.6/javaparser-symbol-solver-model-3.13.6.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/github/javaparser/javaparser-core/3.13.6/javaparser-core-3.13.6.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/github/javaparser/javaparser-core/3.13.6/javaparser-core-3.13.6.jar" sourcepath="M2_REPO/com/github/javaparser/javaparser-core/3.13.6/javaparser-core-3.13.6-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/guava/guava/27.0-jre/guava-27.0-jre.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/guava/failureaccess/1.0/failureaccess-1.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar"/>
