@@ -1,6 +1,7 @@
 package com.ronzhong.JSPH.imp;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.ronzhong.JSPH.SymboInteface.Symbol;
 import com.ronzhong.JSPH.SymboInteface.SymbolFilter;
@@ -10,12 +11,18 @@ public class SymbolFilterChainImp implements SymbolFilterChain {
 
 	private int curIndex = 0;
 
-	private ArrayList<SymbolFilter>  filterlist; // which should has current position attribute.
+	private List<SymbolFilter>  filterlist; // which should has current position attribute.
 
 	public void doFilterOut(Symbol sym) {
 		 SymbolFilter filter = this.filterlist.get(curIndex++);
 		 filter.doFilterOut(sym, this);
 		 filter.afterPropertiesSet();
+	}
+
+	@Override
+	public void add(List<SymbolFilter> filterList) {
+		// TODO Auto-generated method stub
+		this.filterlist = filterList;
 	}
 
 }
