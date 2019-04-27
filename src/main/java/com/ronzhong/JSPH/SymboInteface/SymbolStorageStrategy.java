@@ -10,7 +10,7 @@ public abstract class SymbolStorageStrategy {
 		
 	};
 	
-	protected void Save(Symbol sym) {
+	public void Save(Symbol sym) {
 		
 	}
 }
