@@ -140,7 +140,6 @@ public class JavaSymbolParserAndHandler {
                 	catch(Exception es) {
                 		logger.warn("warnning: got unsolved valuecls:"+ es.getMessage() +"\n");
                 	}
-//                	System.out.print("what we got valuecls:"+n.toString()+"\n");
                 	return super.visit(n, arg);
                 }
 			
