@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.client.ClientEndPoint;
 import com.github.javaparser.ParseResult;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.FieldDeclaration;
@@ -51,6 +55,7 @@ import com.ronzhong.JSPH.imp.SymbolFilterChainImp;
  * Means we don't have to provide only one class to meet all the requirement!
  */
 public class JavaSymbolParserAndHandler {
+	private  Logger logger = LoggerFactory.getLogger(JavaSymbolParserAndHandler.class);
     private  CombinedTypeSolver typeSolver =  null;
 	private  List<SourceRoot> srcrootlist = null;
 //	private  SymbolStorageStrategy outstorage = null;
@@ -109,13 +114,14 @@ public class JavaSymbolParserAndHandler {
                 		ResolvedValueDeclaration resolvedvadec = resValueDecl.getCorrespondingDeclaration();
                 		if(resolvedvadec instanceof JavassistFieldDeclaration) {//means come from jar file
                 		                			
-                			JavassistFieldDeclaration jmd = (JavassistFieldDeclaration) resolvedvadec;
-                			String classSymbol= jmd.declaringType().getQualifiedName();
+                			JavassistFieldDeclaration jfd = (JavassistFieldDeclaration) resolvedvadec;
+                			String classSymbol= jfd.declaringType().getQualifiedName();
+                			String fieldvalue = jfd.getName();
                 			Symbol sym = new Symbol();
                 			sym.setDeclclass(classSymbol);
                 			sym.setType(Symbol.SYM_TYPE_FIELD);
-                			sym.setValue(jmd.getName());
-                			filterchain.doFilterOut(sym);
+                			sym.setValue(fieldvalue);
+                			filterchain.startFilter(sym);
                 			               			
                 		}else if(resolvedvadec instanceof JavaParserFieldDeclaration)  {//means come from java code
                 			FieldDeclaration fielddecl = ((JavaParserFieldDeclaration) resolvedvadec).getWrappedNode() ;
@@ -126,12 +132,14 @@ public class JavaSymbolParserAndHandler {
                 		}
                 	}
                 	else
-                		System.out.print("FIELD_DECLARATIONs: unsupport corresponding:"+resValueDecl.toString()+"\n");
+                		logger.warn("FIELD_DECLARATIONs: unsupport corresponding:"+resValueDecl.toString()+"\n");
                 	}
                 	catch(UnsolvedSymbolException e) {
-//                    	System.out.print("warnning: got unsolved valuecls:"+ e.getMessage() +"\n");
+                    	logger.warn("got unsolved valuecls:"+ e.getMessage() +"\n");
                 	}
-
+                	catch(Exception es) {
+                		logger.warn("warnning: got unsolved valuecls:"+ es.getMessage() +"\n");
+                	}
 //                	System.out.print("what we got valuecls:"+n.toString()+"\n");
                 	return super.visit(n, arg);
                 }
@@ -155,7 +163,7 @@ public class JavaSymbolParserAndHandler {
                 			sym.setDeclclass(classSymbol);
                 			sym.setType(Symbol.SYM_TYPE_METHOD);
                 			sym.setValue(jmd.getName());
-                			filterchain.doFilterOut(sym);
+                			filterchain.startFilter(sym);
                 			
                 		}else if(resolvedmthddec instanceof JavaParserMethodDeclaration)  {//means come from java code
                 			MethodDeclaration methoddecl = ((JavaParserMethodDeclaration) resolvedmthddec).getWrappedNode() ;
@@ -166,13 +174,13 @@ public class JavaSymbolParserAndHandler {
                 		}
                 	}
                 	else
-                		System.out.print("METHOD_DECLARATIONs: unsupport corresponding:"+resMethodDecl.toString()+"\n");
+                		logger.warn("METHOD_DECLARATIONs: unsupport corresponding:"+resMethodDecl.toString()+"\n");
                 	}
                 	catch(UnsolvedSymbolException e) {
-//                    	System.out.print("warnning: got unsovled methoddecls:"+ e.getMessage() +"\n");
+                    	logger.warn("warnning: got unsovled methoddecls:"+ e.getMessage() +"\n");
                 	}
                 	catch(Exception es) {
-                		System.out.print("warnning: got unsolved methoddecls:"+ es.getMessage() +"\n");
+                		logger.warn("warnning: got unsolved methoddecls:"+ es.getMessage() +"\n");
                 	}
                 	return super.visit(n, arg);
                 }

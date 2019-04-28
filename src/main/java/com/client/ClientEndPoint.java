@@ -34,19 +34,23 @@ public class ClientEndPoint {
 				new JavaSymbolRepository(JavaSymbolRepository.REPOSITORY_TYPE_PROJECT , 
                                                             "E:\\my_git_repo\\java_parser\\prototype\\"),
 				new JavaSymboSolver(JavaSymboSolver.SYMBOL_SOLVER_RESOURCE_PATH_TO_JAR, 
-															"E:\\my_git_repo\\java_parser\\jdeps_method\\src\\main\\resources\\JSPHtest.jar"));
+						"E:\\my_git_repo\\java_parser\\jdeps_method\\src\\main\\resources\\JSPHtest.jar").
+					addSymbolSolver(new JavaSymboSolver(ClientEndPoint.class.getClassLoader())));
+			
 		List<SymbolFilter> filterList =  new ArrayList<SymbolFilter>();
 		SymbolStorageStrategy	strategy = new JavaSymbolStorageStrategyFactory().
 				createStoragy(SymbolStorageStrategy.SYM_STORAGET_TYPE_FILE, "E:\\my_git_repo\\java_parser\\result.txt");
-//		SymbolFilter filter = new JavaSymbolFilterFactory().createFilter
-//				(Symbol.SYM_TYPE_METHOD, Symbol.SYM_DECLARATION_CLASS, ".*com\\.ronzhong.*");
 		SymbolFilter filter = new JavaSymbolFilterFactory().createFilter
-				(Symbol.SYM_TYPE_FIELD, Symbol.SYM_DECLARATION_CLASS, ".*");
+				(Symbol.SYM_TYPE_METHOD, Symbol.SYM_DECLARATION_CLASS, ".*com\\.ronzhong.*");
+//		SymbolFilter filter = new JavaSymbolFilterFactory().createFilter
+//				(Symbol.SYM_TYPE_FIELD, Symbol.SYM_DECLARATION_CLASS, ".*");
 		filterList.add(filter);
 
 		int handlercode = 0;//default value
 		
 		jts.getfilterOutSymbols(filterList, strategy, handlercode);
+		
+
 				
 	}
 	

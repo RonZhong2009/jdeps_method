@@ -25,10 +25,10 @@ public class FileSymbolStorageStrategy implements SymbolStorageStrategy {
 
 	public void save(Symbol sym) {
 		try {
-		    FileOutputStream fos = new FileOutputStream(this.filepath);
-		    DataOutputStream outStream = new DataOutputStream(new BufferedOutputStream(fos));
-		    outStream.writeUTF(sym.getValue());
-		    outStream.close();
+			FileOutputStream out = new FileOutputStream(new File(this.filepath), true);
+			out.write((sym.getValue()+"\n").getBytes());
+			out.flush();
+			out.close();
 		}catch(Exception e) {
 			logger.error("FileSymbolStorageStrategy writing error:" +  e.getStackTrace().toString());
 		}

@@ -23,6 +23,11 @@ public class SymbolFilterChainImp implements SymbolFilterChain {
 		}
 
 	}
+	
+	public void startFilter(Symbol sym) {
+		this.curIndex = 0;
+		doFilterOut(sym);
+	}
 
 	@Override
 	public void add(List<SymbolFilter> filterList) {

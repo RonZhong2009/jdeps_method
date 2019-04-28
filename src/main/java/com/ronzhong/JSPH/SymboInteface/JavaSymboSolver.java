@@ -32,6 +32,8 @@ public class JavaSymboSolver {
 	public JavaSymboSolver(int pathType, String filepath) throws IOException{
 	
 		comdepTypeSolver = new CombinedTypeSolver();
+
+		
 		if( pathType == SYMBOL_SOLVER_RESOURCE_PATH_TO_CODE){
 			this.javaparserdepTypeSolver = new JavaParserTypeSolver(filepath);
 			this.comdepTypeSolver.add(this.javaparserdepTypeSolver);
@@ -43,13 +45,31 @@ public class JavaSymboSolver {
 		}
 	};
 	
-	public boolean addSymbolSolver(JavaSymboSolver symSolver) {
+	public JavaSymboSolver addSymbolSolver(JavaSymboSolver symSolver) {
 		if(comdepTypeSolver == null)
 			comdepTypeSolver = new CombinedTypeSolver();
 		
+		//should specify
+		if(symSolver.classloaderdepTypeSolver != null) {
+			if(this.classloaderdepTypeSolver !=null) {
+				logger.error("There have been classloaer slover, another one will raise error");
+			} else {
+				this.classloaderdepTypeSolver  = symSolver.classloaderdepTypeSolver;
+				this.comdepTypeSolver.add(this.classloaderdepTypeSolver);
+			}
+		}
+		
+		if(symSolver.depjarTypeSolver != null && symSolver.depjarTypeSolver != this.depjarTypeSolver)  {
+			this.comdepTypeSolver.add(symSolver.depjarTypeSolver);
+		}
+		
+		if(symSolver.javaparserdepTypeSolver != null && symSolver.javaparserdepTypeSolver != this.javaparserdepTypeSolver)  {
+			this.comdepTypeSolver.add(symSolver.javaparserdepTypeSolver);
+		}
+		
 		//TODO: merge the SymbolSolver into the current instance
 		this.comdepTypeSolver.add(symSolver.getJavaParser());
-		return true;
+		return this;
 	}
 
 	protected CombinedTypeSolver getJavaParser() {
