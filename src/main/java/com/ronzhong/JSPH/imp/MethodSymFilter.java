@@ -32,7 +32,7 @@ public class MethodSymFilter implements SymbolFilter {
 		//TODO: according to the symbol and the symDecType to check whether it matches the pattern it required
 		if(sym.getType() != Symbol.SYM_TYPE_METHOD) {
 			logger.info("MethodSymFilter: skip the symbol not method.");
-			chain.doFilterOut(sym);
+			return;
 		}else {
 			//check whether the attraibute matches the pattern
 			if(symDecType ==Symbol.SYM_DECLARATION_CLASS &&sym.getDeclclass().matches(pattern)){
