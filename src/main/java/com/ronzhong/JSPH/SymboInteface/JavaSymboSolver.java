@@ -14,10 +14,10 @@ import com.github.javaparser.symbolsolver.resolution.typesolvers.JavaParserTypeS
 public class JavaSymboSolver {
 	
 	private Logger logger = LoggerFactory.getLogger(ClientEndPoint.class);
-	private ClassLoaderTypeSolver classloaderdepTypeSolver=null;
+	private List<ClassLoaderTypeSolver> classloaderdepTypeSolver=null;
 	private CombinedTypeSolver comdepTypeSolver=null;
-	private JavaParserTypeSolver javaparserdepTypeSolver=null;
-	private JarTypeSolver depjarTypeSolver=null;
+	private List<JavaParserTypeSolver> javaparserdepTypeSolver=null;
+	private List<JarTypeSolver> depjarTypeSolver=null;
 	 
 	static public int SYMBOL_SOLVER_RESOURCE_PATH_TO_CODE = 0X0001;
 	static public int SYMBOL_SOLVER_RESOURCE_PATH_TO_JAR = 0X0002;
@@ -28,6 +28,10 @@ public class JavaSymboSolver {
 		this.comdepTypeSolver.add(this.classloaderdepTypeSolver);
 		
 	};
+	
+	private List<Object> getdifferntList(List<Object> srclist, List<Object> inputlist){
+		return null;
+	}
 	
 	public JavaSymboSolver(int pathType, String filepath) throws IOException{
 	
