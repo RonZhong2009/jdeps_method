@@ -62,6 +62,8 @@ class SymbolRepoMogodb {
     }
     
     public boolean insert(Symbol sym) {
+    	String jsonStr = mapperObj.writeValueAsString(sym);
+    	this.collection.insertOne(new Document().parse(jsonStr));
     	return true;
     }
 
