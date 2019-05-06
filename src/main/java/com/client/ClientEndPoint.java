@@ -38,8 +38,12 @@ public class ClientEndPoint {
 					addSymbolSolver(new JavaSymboSolver(ClientEndPoint.class.getClassLoader())));
 			
 		List<SymbolFilter> filterList =  new ArrayList<SymbolFilter>();
+//		SymbolStorageStrategy	strategy = new JavaSymbolStorageStrategyFactory().
+//				createStoragy(SymbolStorageStrategy.SYM_STORAGET_TYPE_FILE, "E:\\my_git_repo\\java_parser\\result.txt");
 		SymbolStorageStrategy	strategy = new JavaSymbolStorageStrategyFactory().
-				createStoragy(SymbolStorageStrategy.SYM_STORAGET_TYPE_FILE, "E:\\my_git_repo\\java_parser\\result.txt");
+				createStoragy(SymbolStorageStrategy.SYM_STORAGET_TYPE_MOGODB, 
+						"localhost:27017:javasymbolrepo:syms");
+
 		SymbolFilter filter = new JavaSymbolFilterFactory().createFilter
 				(Symbol.SYM_TYPE_METHOD, Symbol.SYM_DECLARATION_CLASS, ".*com\\.ronzhong.*");
 //		SymbolFilter filter = new JavaSymbolFilterFactory().createFilter

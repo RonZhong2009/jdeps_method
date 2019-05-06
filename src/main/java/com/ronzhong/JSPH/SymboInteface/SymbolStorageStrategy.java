@@ -7,6 +7,8 @@ public interface SymbolStorageStrategy {
 	static public int SYM_STORAGET_TYPE_MOGODB= 0x0004;
 	
 //	 SymbolStorageStrategy(String storagepath);
+	//TODO: should support update symbol
+	//void update
 	
 	void save(Symbol sym);
 }
