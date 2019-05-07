@@ -1,10 +1,11 @@
 /**
  * 
  */
-package com.ronzhong.JSPH.imp;
+package com.ronzhong.JSPH.imp.storageStrategy;
 
 import com.ronzhong.JSPH.SymboInteface.Symbol;
 import com.ronzhong.JSPH.SymboInteface.SymbolStorageStrategy;
+import com.ronzhong.JSPH.imp.storage.SymbolRepoMogodb;
 
 /**
  * @author ron

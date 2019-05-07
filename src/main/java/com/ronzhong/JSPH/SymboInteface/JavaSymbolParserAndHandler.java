@@ -34,8 +34,8 @@ import com.github.javaparser.symbolsolver.reflectionmodel.ReflectionFieldDeclara
 import com.github.javaparser.symbolsolver.reflectionmodel.ReflectionMethodDeclaration;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver;
 import com.github.javaparser.utils.SourceRoot;
-import com.ronzhong.JSPH.imp.OutputSymFilter;
-import com.ronzhong.JSPH.imp.SymbolFilterChainImp;
+import com.ronzhong.JSPH.imp.filter.OutputSymFilter;
+import com.ronzhong.JSPH.imp.filter.SymbolFilterChainImp;
 
 
 
@@ -60,7 +60,7 @@ public class JavaSymbolParserAndHandler {
 	private  List<SourceRoot> srcrootlist = null;
 //	private  SymbolStorageStrategy outstorage = null;
 	private  SymbolFilterChainImp filterchain = null;
-    private  HashMap<String, ArrayList<String>> depsymbols = new HashMap<String, ArrayList<String>>();  
+//    private  HashMap<String, ArrayList<String>> depsymbols = new HashMap<String, ArrayList<String>>();  
 
 	
 	
@@ -187,12 +187,12 @@ public class JavaSymbolParserAndHandler {
         }
         
         System.out.println("Final results:  methods:" );
-    	for(String key: depsymbols.keySet()) {
-    		System.out.println(key+"-----");
-    		for(String item:depsymbols.get(key) ) {
-    			System.out.println("=="+item);
-    		}
-    	}
+//    	for(String key: depsymbols.keySet()) {
+//    		System.out.println(key+"-----");
+//    		for(String item:depsymbols.get(key) ) {
+//    			System.out.println("=="+item);
+//    		}
+//    	}
 
     }
     	

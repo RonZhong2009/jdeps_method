@@ -1,4 +1,4 @@
-package com.ronzhong.JSPH.imp;
+package com.ronzhong.JSPH.imp.storageStrategy;
 
 import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;

@@ -1,7 +1,7 @@
 package com.ronzhong.JSPH.SymboInteface;
 
-import com.ronzhong.JSPH.imp.FieldSymFilter;
-import com.ronzhong.JSPH.imp.MethodSymFilter;
+import com.ronzhong.JSPH.imp.filter.FieldSymFilter;
+import com.ronzhong.JSPH.imp.filter.MethodSymFilter;
 
 public class JavaSymbolFilterFactory {
 	

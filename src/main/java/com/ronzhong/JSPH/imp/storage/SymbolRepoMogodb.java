@@ -1,4 +1,4 @@
-package com.ronzhong.JSPH.imp;
+package com.ronzhong.JSPH.imp.storage;
 
 
 import java.util.Arrays;
@@ -24,7 +24,7 @@ import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 
-class SymbolRepoMogodb {
+public class SymbolRepoMogodb {
 	Logger logger = LoggerFactory.getLogger(SymbolRepoMogodb.class);
 	private MongoCollection<Document> collection;
 	private MongoClient client = null;
